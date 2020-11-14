@@ -15,20 +15,15 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey("d"))
-        {
-            gameObject.transform.position = new Vector3(gameObject.transform.position.x + 0.1f, gameObject.transform.position.y, gameObject.transform.position.z);
-        }
-        
-        if (Input.GetKey("a"))
-        {
-            gameObject.transform.position = new Vector3(gameObject.transform.position.x - 0.1f, gameObject.transform.position.y, gameObject.transform.position.z);
-        }
+        float h = Input.GetAxis("Horizontal");
 
-        if (Input.GetKeyDown("w") && canjump == true)
+        gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(h * 7, gameObject.GetComponent<Rigidbody2D>().velocity.y);
+        
+
+        if (Input.GetKeyDown(KeyCode.Space) && canjump == true)
         {
             canjump = false;
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector3(0, 100, 0));
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 10);
         }
     }
 
